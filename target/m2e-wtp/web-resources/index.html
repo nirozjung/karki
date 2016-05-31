@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<script
+	src="http://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js"></script>
+<body>
+
+	<div ng-app="myApp" ng-controller="formCtrl">
+		<form novalidate name="marketData" action="UploadServlet" ng-contoller="FormCtrl" ng-submit="submitForm()">
+			Currency<br>
+			<select ng-model="user.symbol">
+				<option value="euro">EUR</option>
+				<option value="dollar">USD</option>
+			</select> <br> Bank<br> <input type="text" ng-model="user.bankName"><br>
+			Price<br> <input type="text" ng-model="user.price"><br>
+			<br> <br>
+			<input type="submit">
+			<button ng-click="reset()">RESET</button>
+		</form>
+		<p>form = {{user }}</p>
+		<p>master = {{master}}</p>
+	</div>
+
+	<script>
+		var app = angular.module('myApp', []);
+		app.controller('formCtrl', function($scope) {
+			$scope.master = {
+				symbol : "EUR",
+				bankName : "Santander",
+				price:"200"
+			};
+			$scope.reset = function() {
+				$scope.user = angular.copy($scope.master);
+			};
+			$scope.reset();
+		});
+	</script>
+
+</body>
+</html>
